@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">todo</string>
+    <string name="home">Home</string>
+    <string name="add">Dashboard</string>
+    <string name="notifications">Notifications</string>
+
+    <string name="current_temp_format">현재 온도: <small>%s</small></string>
+    <string name="today_todo_percent">오늘 할 일 %s퍼센트 달성</string>
+    <string name="today_todo_nothing">오늘 할 일 없음</string>
+</resources>

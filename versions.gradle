@@ -1,0 +1,98 @@
+ext.deps = [:]
+ext.sdk = [:]
+
+// versions
+def versions = [:]
+versions.appcompat_version = '1.6.1'
+versions.material_version = '1.11.0'
+versions.constraint_version = '2.1.4'
+
+versions.lifecycle_version = '2.7.0'
+
+versions.navigation_version = '2.7.7'
+
+versions.retrofit_version = '2.6.4'
+
+versions.rxandroid_version = '2.1.1'
+versions.rxjava_version = '2.2.17'
+
+versions.hilt_version = '2.44'
+
+versions.ktx_core_version = '1.7.0'
+versions.ktx_activity_version = '1.1.0'
+versions.ktx_fragment_version = '1.2.5'
+
+versions.room_version = '2.2.6'
+versions.gson_version = '2.8.7'
+versions.timber_version = '5.0.1'
+
+def deps = [:]
+// SDK versions
+def sdk = [:]
+sdk.compile = 34
+sdk.min = 32
+sdk.target = 34
+
+// Appcompat
+deps.appcompat = "androidx.appcompat:appcompat:$versions.appcompat_version"
+
+// Material
+deps.material = "com.google.android.material:material:$versions.material_version"
+
+// Constraint Layout
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_version"
+
+// Lifecycle
+def lifecycle = [:]
+lifecycle.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle_version"
+lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_version"
+deps.lifecycle = lifecycle
+
+// Navigation
+def navigation = [:]
+navigation.fragment = "androidx.navigation:navigation-fragment-ktx:$versions.navigation_version"
+navigation.ui = "androidx.navigation:navigation-ui-ktx:$versions.navigation_version"
+deps.navigation = navigation
+
+// Retrofit
+def retrofit = [:]
+retrofit.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit_version"
+retrofit.converter_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit_version"
+retrofit.converter_xml = "com.squareup.retrofit2:converter-simplexml:$versions.retrofit_version"
+retrofit.adapter_rx = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit_version"
+deps.retrofit = retrofit
+
+// RxJava2
+def rx = [:]
+rx.android = "io.reactivex.rxjava2:rxandroid:$versions.rxandroid_version"
+rx.java = "io.reactivex.rxjava2:rxjava:$versions.rxjava_version"
+deps.rx = rx
+
+// Hilt
+def hilt =[:]
+hilt.android = "com.google.dagger:hilt-android:$versions.hilt_version"
+hilt.compiler = "com.google.dagger:hilt-compiler:$versions.hilt_version"
+deps.hilt = hilt
+
+// KTX
+def ktx = [:]
+ktx.core = "androidx.core:core-ktx:$versions.ktx_core_version"
+ktx.activity = "androidx.activity:activity-ktx:$versions.ktx_activity_version"
+ktx.fragment = "androidx.fragment:fragment-ktx:$versions.ktx_fragment_version"
+deps.ktx = ktx
+
+// Gson
+deps.gson = "com.google.code.gson:gson:$versions.gson_version"
+
+// Timber
+deps.timber = "com.jakewharton.timber:timber:$versions.timber_version"
+
+// Room
+def room =[:]
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room_version"
+room.compiler = "androidx.room:room-compiler:$versions.room_version"
+room.ktx = "androidx.room:room-ktx:$versions.room_version"
+deps.room = room
+
+ext.deps = deps
+ext.sdk = sdk

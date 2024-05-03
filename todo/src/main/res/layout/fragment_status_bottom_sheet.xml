@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="sheet"
+            type="hee.study.todo.ui.AddBottomSheetFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="300dp">
+
+        <ImageView
+            android:id="@+id/img_before"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ck_before"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/img_doing"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/img_doing"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ck_doing"
+            app:layout_constraintEnd_toStartOf="@+id/img_completed"
+            app:layout_constraintStart_toEndOf="@+id/img_before"
+            app:layout_constraintTop_toTopOf="@id/img_before" />
+
+        <ImageView
+            android:id="@+id/img_completed"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ck_completed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_doing"
+            app:layout_constraintTop_toTopOf="@id/img_before" />
+
+        <TextView
+            android:id="@+id/tv_before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시작 전"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/img_before"
+            app:layout_constraintStart_toStartOf="@+id/img_before"
+            app:layout_constraintTop_toBotomOf="@id/img_before"
+            app:layout_constraintTop_toBottomOf="@+id/img_before" />
+
+        <TextView
+            android:id="@+id/tv_doing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="진행 중"
+            app:layout_constraintEnd_toEndOf="@+id/img_doing"
+            app:layout_constraintStart_toStartOf="@+id/img_doing"
+            app:layout_constraintTop_toTopOf="@id/tv_before" />
+
+        <TextView
+            android:id="@+id/tv_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="완료"
+            app:layout_constraintEnd_toEndOf="@+id/img_completed"
+            app:layout_constraintStart_toStartOf="@+id/img_completed"
+            app:layout_constraintTop_toTopOf="@id/tv_before" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
