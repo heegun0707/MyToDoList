@@ -9,6 +9,7 @@ import hee.study.domain.usecase.*
 import hee.study.domain.utils.TodoStatus
 import hee.study.todo.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -138,4 +139,9 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getSelectedItem() = selectedTodoItem
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 }
