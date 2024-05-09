@@ -6,6 +6,7 @@ import hee.study.domain.model.TodoItem
 fun mapperToEntity(entity: List<TodoEntity>): List<TodoItem> {
     return entity.toList().map {
         TodoItem(
+            it.id,
             it.title,
             it.memo,
             it.startDate,

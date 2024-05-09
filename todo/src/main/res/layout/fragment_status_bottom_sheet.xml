@@ -11,19 +11,28 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="300dp">
+        android:layout_height="200dp"
+        android:background="@color/black_80">
+
+        <ImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
             android:id="@+id/img_before"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ck_before"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toStartOf="@id/img_doing"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_cancel" />
 
         <ImageView
             android:id="@+id/img_doing"
@@ -48,10 +57,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시작 전"
+            android:textColor="@color/white"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="@+id/img_before"
             app:layout_constraintStart_toStartOf="@+id/img_before"
-            app:layout_constraintTop_toBotomOf="@id/img_before"
             app:layout_constraintTop_toBottomOf="@+id/img_before" />
 
         <TextView
@@ -59,6 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="진행 중"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/img_doing"
             app:layout_constraintStart_toStartOf="@+id/img_doing"
             app:layout_constraintTop_toTopOf="@id/tv_before" />
@@ -68,8 +78,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="완료"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/img_completed"
             app:layout_constraintStart_toStartOf="@+id/img_completed"
             app:layout_constraintTop_toTopOf="@id/tv_before" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_before"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

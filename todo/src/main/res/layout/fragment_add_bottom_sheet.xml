@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,45 +10,93 @@
             type="hee.study.todo.ui.AddBottomSheetFragment" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="300dp">
+        android:background="@color/black_80">
 
-        <EditText
-            android:id="@+id/et_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:hint="할 일 작성"
-            android:textSize="20sp"
+        <ImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/img_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="12dp"
+            android:visibility="invisible"
+            android:onClick="@{() -> sheet.deleteTodo()}"
+            app:srcCompat="@android:drawable/ic_menu_delete"
+            app:layout_constraintEnd_toStartOf="@id/ck_favorite"
+            app:layout_constraintTop_toTopOf="@id/ck_favorite"
+            app:layout_constraintBottom_toBottomOf="@id/ck_favorite"/>
 
         <CheckBox
             android:id="@+id/ck_favorite"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            android:button="@null"
+            android:background="@drawable/fav_todo_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_cancel" />
+
+        <ImageView
+            android:id="@+id/img_status"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:button="@null"
+            android:src="@drawable/ck_before"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_cancel" />
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:hint="할 일 작성"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_60"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_status"
+            app:layout_constraintTop_toTopOf="@+id/img_status" />
+
+        <hee.study.todo.ui.CustomInputView
+            android:id="@+id/input_view_memo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:title="메모"
+            app:layout_constraintTop_toBottomOf="@id/et_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <hee.study.todo.ui.CustomInputView
+            android:id="@+id/input_view_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:title="마감일"
+            app:layout_constraintTop_toBottomOf="@id/input_view_memo"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
             android:id="@+id/btn_confirm"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:onClick="@{() -> sheet.insertTodo()}"
-            android:background="@color/black"
+            android:layout_marginTop="100dp"
             android:text="확인"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_title"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/et_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

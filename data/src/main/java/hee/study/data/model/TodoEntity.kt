@@ -11,7 +11,7 @@ import java.util.Date
 data class TodoEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_ID)
-    val id: Int = 0,
+    val id: Long = 0,
     var title: String,
     var memo: String? = null,
     var startDate: Date,

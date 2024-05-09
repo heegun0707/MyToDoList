@@ -54,7 +54,7 @@
             android:layout_marginTop="12dp"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="12sp"
             android:text="@{String.format(@string/current_temp_format, weatherVm.temp)}"
             app:layout_constraintTop_toBottomOf="@id/view_top"
             app:layout_constraintStart_toStartOf="@id/view_top"/>
@@ -63,46 +63,59 @@
             android:id="@+id/view_advice_background"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/background_advice"
             app:layout_constraintTop_toBottomOf="@id/tv_current_temp"/>
 
         <TextView
             android:id="@+id/tv_advice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:text="오늘의 명언"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/view_advice_background"
+            app:layout_constraintStart_toStartOf="@id/view_advice_background"/>
+
+        <TextView
+            android:id="@+id/tv_advice_value"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="12dp"
+            android:gravity="center_vertical"
             android:text="@{homeVm.advice}"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintTop_toTopOf="@id/view_advice_background"
             app:layout_constraintBottom_toBottomOf="@id/view_advice_background"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_todo"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp"
-            android:text="Hello World!"
+            android:layout_height="0dp"
             android:background="@color/black_80"
             android:visibility="@{homeVm.toDoList.size() == 0 ? View.GONE : View.VISIBLE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_advice_background"
             tools:itemCount="5"
-            tools:listitem="@layout/item_todo_list"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:layout_editor_absoluteX="20dp"
+            tools:listitem="@layout/item_todo_list" />
 
         <TextView
             android:id="@+id/tv_empty"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:gravity="center"
-            android:textColor="@color/white"
+            android:layout_height="0dp"
             android:background="@color/black_80"
-            android:textSize="20sp"
+            android:gravity="center"
             android:text="할 일을 등록해보세요."
+            android:textColor="@color/white"
+            android:textSize="20sp"
             android:visibility="@{homeVm.toDoList.size() == 0 ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_advice_background" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

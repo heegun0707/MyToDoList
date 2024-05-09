@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hee.study.domain.model.TodoItem
 import hee.study.domain.usecase.*
+import hee.study.domain.utils.TodoStatus
 import hee.study.todo.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -20,6 +21,9 @@ class HomeViewModel @Inject constructor(
     private val getTodoCountUseCase: GetTodoCountUseCase,
     private val getAdviceUseCase: GetAdviceUseCase,
     private val insertTodoUseCase: InsertTodoUseCase,
+    private val updateTodoFavoriteUseCase: UpdateTodoFavoriteUseCase,
+    private val updateTodoStatusUseCase: UpdateTodoStatusUseCase,
+    private val updateTodoUseCase: UpdateTodoUseCase,
     private val deleteTodoUseCase: DeleteTodoUseCase
 ) : BaseViewModel() {
     private val _toDoList = MutableLiveData<List<TodoItem>>(/*emptyList()*/)
@@ -33,6 +37,8 @@ class HomeViewModel @Inject constructor(
 
     private val _advice = MutableLiveData<String>()
     val advice: LiveData<String> get() = _advice
+
+    private lateinit var selectedTodoItem: TodoItem
 
     init {
         getTodoList()
@@ -69,7 +75,10 @@ class HomeViewModel @Inject constructor(
                     )
                 }.collect {
                     Timber.d("Total Count : ${it.first}, Completed Count : ${it.second}")
-                    _toDoPercent.value = (it.second / it.first * 100).toString()
+                    Timber.d("Percent : ${it.second.toDouble() / it.first.toDouble() * 100}")
+                    _toDoPercent.value = if (it.first != 0) {
+                        (it.second.toDouble() / it.first.toDouble() * 100).toInt().toString()
+                    } else "0"
                     _toDoCount.value = it
                 }
         }
@@ -93,12 +102,40 @@ class HomeViewModel @Inject constructor(
     fun insertTodo(todoItem: TodoItem) {
         viewModelScope.launch(Dispatchers.IO) {
             insertTodoUseCase.execute(todoItem)
+            getTodoCount()
         }
     }
 
-    fun deleteTodo(id: Int) {
+    fun updateFavorite(id: Long, isFavorite: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            deleteTodoUseCase.execute(id)
+            updateTodoFavoriteUseCase.execute(id, isFavorite)
+            getTodoCount()
         }
     }
+
+    fun updateStatus(id: Long, status: TodoStatus) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateTodoStatusUseCase.execute(id, status)
+            getTodoCount()
+        }
+    }
+
+    fun updateTodo(todoItem: TodoItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateTodoUseCase.execute(todoItem)
+        }
+    }
+
+    fun deleteTodo(id: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            deleteTodoUseCase.execute(id)
+            getTodoCount()
+        }
+    }
+
+    fun setSelectedItem(item: TodoItem) {
+        selectedTodoItem = item
+    }
+
+    fun getSelectedItem() = selectedTodoItem
 }

@@ -7,11 +7,13 @@ import hee.study.data.source.AppDatabase
 import hee.study.domain.model.Advice
 import hee.study.domain.model.TodoItem
 import hee.study.domain.repository.TodoRepository
+import hee.study.domain.utils.TodoStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import timber.log.Timber
 import javax.inject.Inject
 
 class TodoRepositoryImpl @Inject constructor(
@@ -56,10 +58,31 @@ class TodoRepositoryImpl @Inject constructor(
             status = todoItem.status,
             isFavorite = todoItem.isFavorite
         )
-        return database.todoDao().insertTodo(todo)
+        database.todoDao().insertTodo(todo)
     }
 
-    override suspend fun deleteTodo(id: Int) {
+    override suspend fun updateFavorite(id: Long, isFavorite: Boolean) {
+        Timber.e("isChecked: $isFavorite")
+        database.todoDao().updateFavorite(id, isFavorite)
+    }
+
+    override suspend fun updateStatus(id: Long, status: TodoStatus) {
+        database.todoDao().updateStatus(id, status.name)
+    }
+
+    override suspend fun updateTodo(todoItem: TodoItem) {
+        val todo = TodoEntity(
+            title = todoItem.title,
+            memo = todoItem.memo,
+            startDate = todoItem.startDate,
+            endDate = todoItem.endDate,
+            status = todoItem.status,
+            isFavorite = todoItem.isFavorite
+        )
+        database.todoDao().updateTodo(todo)
+    }
+
+    override suspend fun deleteTodo(id: Long) {
         return database.todoDao().deleteTodo(id)
     }
 
